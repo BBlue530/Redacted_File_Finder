@@ -4,6 +4,6 @@ from Archive_Curl import curl_archive, filter_urls
 
 domain = input("Enter Website: ")
 curl_archive(domain)
-filter_urls()
-check_snapshots()
-download_files()
+filtered_url = filter_urls()
+successful_snapshot = check_snapshots(filtered_url)
+download_files(successful_snapshot)

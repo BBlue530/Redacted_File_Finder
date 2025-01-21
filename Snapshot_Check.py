@@ -2,10 +2,7 @@ import requests
 import concurrent.futures
 import time
 import random
-
-unsuccessful_snapshot = 0
-successful_snapshot = 0
-total_try_snapshot = 0
+from Variables import successful_snapshot, unsuccessful_snapshot, total_try_snapshot
 
 def check_snapshot(url):
     snapshot_api = f"https://archive.org/wayback/available?url={url}"
@@ -21,6 +18,7 @@ def check_snapshot(url):
 
         if response.status_code == 429:
             print(f"Rate limited. Received 429 for: {url}.")
+            print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total URLs Tried: {total_try_snapshot} Total URLs: {total_url}")
             time.sleep(15)
             return check_snapshot(url)
 
@@ -28,7 +26,7 @@ def check_snapshot(url):
             unsuccessful_snapshot += 1
             total_try_snapshot += 1
             print(f"Error: Received status code {response.status_code} Url: {url}")
-            print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total Snapshots Tried: {total_try_snapshot}")
+            print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total URLs Tried: {total_try_snapshot} Total URLs: {total_url}")
             return (url, None, False)
 
         try:
@@ -37,7 +35,7 @@ def check_snapshot(url):
             unsuccessful_snapshot += 1
             total_try_snapshot += 1
             print(f"Error: Invalid JSON response: {url}")
-            print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total Snapshots Tried: {total_try_snapshot}")
+            print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total URLs Tried: {total_try_snapshot} Total URLs: {total_url}")
             return (url, None, False)
 
         if "archived_snapshots" in data and "closest" in data["archived_snapshots"]:
@@ -50,34 +48,37 @@ def check_snapshot(url):
                 total_try_snapshot += 1
                 archived_url = f"http://web.archive.org/web/{timestamp}/{url}"
                 print(f"Snapshot found for: {url}")
-                print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total Snapshots Tried: {total_try_snapshot}")
+                print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total URLs Tried: {total_try_snapshot} Total URLs: {total_url}")
                 return (url, archived_url, True)
             else:
                 unsuccessful_snapshot += 1
                 total_try_snapshot += 1
                 print(f"Snapshot for: {url} not available Status: {status}")
-                print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total Snapshots Tried: {total_try_snapshot}")
+                print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total URLs Tried: {total_try_snapshot} Total URLs: {total_url}")
                 return (url, None, False)
         else:
             unsuccessful_snapshot += 1
             total_try_snapshot += 1
             print(f"No snapshot for: {url}")
+            print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total URLs Tried: {total_try_snapshot} Total URLs: {total_url}")
             return (url, None, False)
 
     except requests.exceptions.Timeout:
         unsuccessful_snapshot += 1
         total_try_snapshot += 1
         print(f"Request to: {url} timed out after {timeout_duration} seconds.")
-        print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total Snapshots Tried: {total_try_snapshot}")
+        print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total URLs Tried: {total_try_snapshot} Total URLs: {total_url}")
         return (url, None, False)
     except Exception as e:
         unsuccessful_snapshot += 1
         total_try_snapshot += 1
         print(f"Error: {url}: {e}")
-        print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total Snapshots Tried: {total_try_snapshot}")
+        print(f"Successful: {successful_snapshot} Unsuccessful: {unsuccessful_snapshot} Total URLs Tried: {total_try_snapshot} Total URLs: {total_url}")
         return (url, None, False)
 
-def check_snapshots():
+def check_snapshots(filtered_url):
+    global total_url
+    total_url = filtered_url
     with open("filtered_urls.txt", "r") as file:
         filtered_urls = file.readlines()
 
@@ -103,3 +104,4 @@ def check_snapshots():
             invalid_file.write(invalid_url + "\n")
 
     print(f"Finished checking valid URL.")
+    return successful_snapshot
