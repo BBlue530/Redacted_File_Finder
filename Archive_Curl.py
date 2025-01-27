@@ -14,7 +14,7 @@ def curl_archive(domain):
         subprocess.run(curl_command, stdout=out_file)
 
 def filter_urls():
-    pattern = r"\.(xls|xlsx|pdf|sql|doc|docx|pptx|zip|tar|gz|tgz|bak|7z|rar|db|backup|exe|dll|bin|bat|sh|deb|rpm|iso|img|apk|msi|dmg|tmp|crt|pem|key|pub|asc|txt|csv|log|md|json|xml|jpg|bmp|tiff|avi|mov|mkv|dwg|dxf|ai|psd|sketch|html|css|js|iso|img|ova|ovf|tar.gz|tar.xz|zipx|bz2|xz|lzma|epub|mobi|azw3|obj|stl|fbx|dae|3ds|ply|ogg|flac|wav|aac|ini|conf|yml|yaml|properties|out|err)$"
+    pattern = r"\.(xls|xlsx|pdf|sql|doc|docx|pptx|zip|db|backup|apk|txt|csv|json|xml|html|css|js|epub|mobi|azw3|obj|stl|fbx|avi|mov|mkv|psd|ai|dwg|dxf|sketch|tar|tar.gz|tar.xz|zipx|bz2|xz|lzma|mkv|flac|wav|aac|conf|yml|yaml|properties|out|err|cache|secret|config|md5|ini|img|)$"
     global total_filtered_urls
 
     with open("unfiltered_urls.txt", "r") as file:

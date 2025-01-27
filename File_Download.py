@@ -2,16 +2,14 @@ import subprocess
 import os
 import time
 from Variables import total_download_try, successful_download, unsuccessful_download
+from Metadata_Extraction import process_folder
 
 VALID_EXTENSIONS = [
-    'xls', 'xlsx', 'pdf', 'sql', 'doc', 'docx', 'pptx', 'zip', 'tar', 'gz', 'tgz', 
-    'bak', '7z', 'rar', 'db', 'backup', 'exe', 'dll', 'bin', 'bat', 'sh', 'deb', 
-    'rpm', 'iso', 'img', 'apk', 'msi', 'dmg', 'tmp', 'crt', 'pem', 'key', 'pub', 
-    'asc', 'txt', 'csv', 'log', 'md', 'json', 'xml', 'jpg', 'bmp', 'tiff', 
-    'avi', 'mov', 'mkv', 'dwg', 'dxf', 'ai', 'psd', 'sketch', 'html', 'css', 'js', 
-    'iso', 'img', 'ova', 'ovf', 'tar.gz', 'tar.xz', 'zipx', 'bz2', 'xz', 'lzma', 'epub', 
-    'mobi', 'azw3', 'obj', 'stl', 'fbx', 'dae', '3ds', 'ply', 'ogg', 'flac', 'wav', 'aac', 
-    'ini', 'conf', 'yml', 'yaml', 'properties', 'out', 'err',
+    'xls', 'xlsx', 'pdf', 'sql', 'doc', 'docx', 'pptx', 'zip', 'db', 'backup', 
+    'apk', 'txt', 'csv', 'json', 'xml', 'html', 'css', 'js', 'epub', 'mobi', 
+    'azw3', 'obj', 'stl', 'fbx', 'dae', '3ds', 'ply', 'avi', 'mov', 'mkv', 
+    'psd', 'ai', 'dwg', 'dxf', 'sketch', 'cache', 'secret', 'config',
+    'md5', 'ini', 'img',
 ]
 
 def download_file(url, download_folder, retries=3, timeout=30):
@@ -80,3 +78,9 @@ def download_files(successful_snapshot):
 
     print(f"Finished downloading files. {successful_downloads} files downloaded.")
     print(f"{failed_downloads} downloads failed.")
+    answer = input("Want to start metadata extraction? [Y/N]").lower()
+    if answer == "y":
+        print("Starting Metadata Extraction...")
+        process_folder(download_folder)
+    else:
+        print("Exit...")
