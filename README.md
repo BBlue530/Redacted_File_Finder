@@ -1,66 +1,72 @@
-Legal Disclaimer
+# Redacted File Finder
 
-Educational Use Only
+## Overview
 
-This tool is intended solely for educational and ethical purposes. It is designed to help users understand and learn about cybersecurity and the 
-importance of vulnerability scanning and identifying redacted or sensitive information in files. The creators of this project do not encourage or 
-support any form of illegal activity, unauthorized access, or unethical behavior.
+This tool automates the process of:
 
-No Unauthorized Use
+- Scraping historical URLs from the Wayback Machine
+- Filtering URLs with specific file extensions
+- Checking for available archived snapshots
+- Downloading accessible files
+- Extracting metadata from various file types
 
-By using this tool, you agree to abide by all relevant laws and regulations governing cybersecurity and data privacy in your jurisdiction. This tool 
-is not intended for use against any systems, networks, or files for which you do not have explicit authorization. Unauthorized scanning or probing of 
-systems, networks, or files without permission is illegal and could lead to severe legal consequences.
+It is intended for use in research, digital forensics, archival exploration, and cybersecurity investigations.
 
-Responsibility and Liability
+## Usage
 
-The creators of this tool assume no responsibility for any damage, loss, or legal consequences that arise from the use or misuse of this tool. You, 
-the user, are fully responsible for ensuring that you use this tool in a legal, ethical, and responsible manner. By using this tool, you acknowledge 
-that you are doing so at your own risk and agree to hold the creators harmless from any legal or personal consequences.
+1. Clone or download this repository.
 
-Compliance with Laws
+2. Ensure Python 3 is installed and available in your system path.
 
-It is the user’s responsibility to ensure that their actions comply with local, national, and international laws, including those governing data privacy, 
-cybersecurity, and intellectual property. Use this tool only on systems or data for which you have explicit permission, and make sure you have proper 
-authorization before scanning or analyzing any network or file systems.
+3. Run the setup script to initialize a virtual environment and install dependencies:
 
-Data Handling and Privacy
+   ```bash
+   python Filefinder.py
+   ```
 
-This tool does not store or process any data beyond its immediate functionality. Any data or files analyzed using this tool are not collected, stored, or 
-shared in any form. Users are advised to handle all data responsibly and comply with relevant privacy laws and policies.
+4. When prompted, enter the domain you want to search:
 
-Responsible Use
+   ```bash
+   Enter Website: example.com
+   ```
 
-The creators encourage responsible and ethical use of this tool to foster positive contributions to the cybersecurity community. Always prioritize ethical 
-hacking practices, such as obtaining explicit consent and working within the bounds of the law.
+5. The tool will:
+   - Retrieve all historical URLs for the domain
+   - Filter by supported file types
+   - Check availability via the Wayback Machine
+   - Download valid archived files
+   - Optionally begin metadata extraction
 
-Responsible Disclosure
+6. After download, the user is prompted to extract metadata from the downloaded files. A metadata report will be saved to `metadata.txt`.
 
-If you discover a security vulnerability while using this tool, you are encouraged to report it responsibly to the system owner or maintainers. Do not exploit 
-vulnerabilities or share details without proper authorization.
+## Supported File Types
 
-Prohibited Uses
+The tool currently supports metadata extraction for:
 
-This tool must not be used for any malicious activities, including but not limited to unauthorized access to systems, data theft, or disruption of services. 
-Any attempts to use this tool for such purposes are strictly prohibited and will be considered a violation of this agreement.
+- Microsoft Excel (`.xls`, `.xlsx`)
+- Microsoft Word (`.doc`, `.docx`)
+- PDF files (`.pdf`)
+- JSON and CSV files
+- SQLite database files (`.db`, `.sql`, `.backup`)
+- ZIP archives
+- Raw image files (`.img`)
 
-Indemnity
+Other types may be filtered for download but are not guaranteed to be processed.
 
-You agree to indemnify, defend, and hold harmless the creators of this tool from any claims, damages, liabilities, or expenses (including legal fees) arising 
-out of your use or misuse of this tool, including any actions that may violate laws or regulations.
+## Legal Disclaimer
 
-Third-Party Libraries and Dependencies
+### Data Handling and Privacy
 
-This tool may rely on third-party libraries or services. By using this tool, you acknowledge that you are aware of and agree to comply with the licensing 
-terms and conditions of any third-party dependencies used in this project.
+This tool does not store or process any data beyond its immediate functionality. Any data or files analyzed using this tool are not collected, stored, or shared in any form. Users are advised to handle all data responsibly and comply with relevant privacy laws and policies.
 
-No Warranty
+### Responsible Use
 
-This tool is provided “as-is,” without any warranty of any kind, either express or implied, including but not limited to the warranties of merchantability, 
-fitness for a particular purpose, or non-infringement. The creators make no guarantees regarding the accuracy, completeness, or functionality of the tool, 
-and are not responsible for any unintended consequences of using it.
+The creators encourage responsible and ethical use of this tool to foster positive contributions to the cybersecurity community. Always prioritize ethical hacking practices, such as obtaining explicit consent and working within the bounds of the law.
 
-User Acknowledgment
+### Responsible Disclosure
 
-By using this tool, you acknowledge that you have read, understood, and agree to the terms and conditions outlined in this legal disclaimer. 
-If you do not agree to these terms, do not use this tool.
+If you discover a security vulnerability while using this tool, you are encouraged to report it responsibly to the system owner or maintainers. Do not exploit vulnerabilities or share details without proper authorization.
+
+### User Acknowledgment
+
+By using this tool, you acknowledge that you have read, understood, and agree to the terms and conditions outlined in this legal disclaimer. If you do not agree to these terms, do not use this tool.

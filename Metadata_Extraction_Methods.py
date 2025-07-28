@@ -6,11 +6,6 @@ from PyPDF2 import PdfReader
 import openpyxl
 import sqlite3
 from PIL import Image
-# If your having problems use this in a virtual enviroment:
-# python3 -m venv myenv
-# source myenv/bin/activate
-# pip install zipfile36 PyPDF2 openpyxl Pillow requests
-# pip install python-docx
 
 def excel_metadata(downloaded_files):
     metadata = {}
