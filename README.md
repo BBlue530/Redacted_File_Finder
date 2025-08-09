@@ -52,21 +52,3 @@ The tool currently supports metadata extraction for:
 - Raw image files (`.img`)
 
 Other types may be filtered for download but are not guaranteed to be processed.
-
-## Legal Disclaimer
-
-### Data Handling and Privacy
-
-This tool does not store or process any data beyond its immediate functionality. Any data or files analyzed using this tool are not collected, stored, or shared in any form. Users are advised to handle all data responsibly and comply with relevant privacy laws and policies.
-
-### Responsible Use
-
-The creators encourage responsible and ethical use of this tool to foster positive contributions to the cybersecurity community. Always prioritize ethical hacking practices, such as obtaining explicit consent and working within the bounds of the law.
-
-### Responsible Disclosure
-
-If you discover a security vulnerability while using this tool, you are encouraged to report it responsibly to the system owner or maintainers. Do not exploit vulnerabilities or share details without proper authorization.
-
-### User Acknowledgment
-
-By using this tool, you acknowledge that you have read, understood, and agree to the terms and conditions outlined in this legal disclaimer. If you do not agree to these terms, do not use this tool.
